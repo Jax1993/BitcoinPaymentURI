@@ -161,11 +161,11 @@ open class BitcoinPaymentURI: BitcoinPaymentURIProtocol {
      
       - returns: a BitcoinPaymentURI.
     */
-    open static func parse(_ bitcoinPaymentURI: String) -> BitcoinPaymentURI? {
+    public static func parse(_ bitcoinPaymentURI: String) -> BitcoinPaymentURI? {
         guard bitcoinPaymentURI.contains(":") else { return nil }
         guard let schema = bitcoinPaymentURI.components(separatedBy: ":").first else { return nil }
         
-        let paramReqRange = Range<String.Index>(bitcoinPaymentURI.index(bitcoinPaymentURI.startIndex, offsetBy: 0)..<bitcoinPaymentURI.index(bitcoinPaymentURI.startIndex, offsetBy: PARAMETER_REQUIRED_PREFIX.count))
+        let paramReqRange = Range(NSRange(location: 0, length: PARAMETER_REQUIRED_PREFIX.count), in: bitcoinPaymentURI)
         
         let urlComponents = URLComponents(string: String(bitcoinPaymentURI))
         
